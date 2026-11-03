@@ -1,5 +1,4 @@
-
-    /* ==========================================================
+/* ==========================================================
        1. CORES (tema claro por padrão, escuro automático)
        ========================================================== */
     :root {
@@ -165,9 +164,22 @@
     .tab {
       background: none;
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-radius: 18px;
       padding: 4px 14px;
       font-size: 1.05rem;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .tab small {
+      display: block;
+      font-size: 0.72em;
+      opacity: 0.65;
+    }
+
+    /* aba do dia de hoje */
+    .tab.hoje {
+      border-color: var(--done);
     }
 
     .tab[aria-pressed="true"] {
@@ -278,4 +290,3 @@
 
       .meta .kbd { display: none; }
     }
- 
