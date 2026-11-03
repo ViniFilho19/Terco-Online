@@ -1,5 +1,4 @@
-
-    /* ==========================================================
+/* ==========================================================
        1. TEXTOS (edite aqui para mudar orações e mistérios)
        ========================================================== */
     const ORACOES = {
@@ -93,17 +92,19 @@
         ]
       });
 
-      // haste: Pai Nosso, 3 Ave Marias e Glória
+      // haste: Pai Nosso, 3 Ave Marias, Glória (pequena) e o Pai Nosso que abre a 1ª dezena
       novoPasso({ k: "pai", d: -1, x: 300, y: 725, r: 20, els: [conta(300, 725, 12)] });
       [684, 656, 628].forEach((y, i) => {
         novoPasso({ k: "ave", d: -1, n: i + 1, x: 300, y, r: 14, els: [conta(300, y, 7.5)] });
       });
-      novoPasso({ k: "gloria", d: -1, x: 300, y: 590, r: 20, els: [conta(300, 590, 12)] });
+      novoPasso({ k: "gloria", d: -1, x: 300, y: 602, r: 14, els: [conta(300, 602, 5)] });
+      novoPasso({ k: "pai", d: 0, x: 300, y: 568, r: 20, els: [conta(300, 568, 12)] });
 
       // 5 dezenas: 1 conta grande + 10 pequenas + 1 conta do Glória
+      // (o Pai Nosso da 1ª dezena já foi desenhado na haste, então ela começa em j = 1)
       for (let dezena = 0; dezena < 5; dezena++) {
-        for (let j = 0; j < 12; j++) {
-          const angulo = (90 + (dezena * 12 + j + 1) * 360 / 61) * Math.PI / 180;
+        for (let j = dezena === 0 ? 1 : 0; j < 12; j++) {
+          const angulo = (90 + (dezena * 12 + j) * 360 / 60) * Math.PI / 180;
           const x = CENTRO_X + RAIO * Math.cos(angulo);
           const y = CENTRO_Y + RAIO * Math.sin(angulo);
 
@@ -178,8 +179,8 @@
         case "gloria":
           return {
             nome: "Glória",
-            contagem: passo.d < 0 ? "Conta grande" : "Fim da dezena",
-            textos: passo.d < 0 ? [ORACOES.gloria] : [ORACOES.gloria, ORACOES.jesus]
+            contagem: passo.d < 0 ? "Conta pequena" : "Fim da dezena",
+            textos: [ORACOES.gloria, ORACOES.jesus]
           };
 
         default: // salve
@@ -271,4 +272,3 @@
        7. INICIAR
        ========================================================== */
     mostrar(atual);
-  
