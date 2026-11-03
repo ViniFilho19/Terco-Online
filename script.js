@@ -13,32 +13,32 @@
 
     const MISTERIOS = [
       { nome: "Gozosos", singular: "gozoso", itens: [
-        "A Anunciação do Anjo a Maria",
-        "A Visita de Maria a Isabel",
+         "A Anunciação do Anjo a Maria",
+        "A Visita de Maria a sua prima Santa Isabel",
         "O Nascimento de Jesus em Belém",
-        "A Apresentação de Jesus no Templo",
-        "O Encontro de Jesus no Templo"
-      ]},
+        "A Apresentação de Jesus no Templo e a Purificação de Nossa Senhora",
+        "A Perda e o Encontro de Jesus no Templo" ]},
+
       { nome: "Luminosos", singular: "luminoso", itens: [
-        "O Batismo de Jesus no Jordão",
-        "A Revelação de Jesus nas Bodas de Caná",
-        "O Anúncio do Reino de Deus",
+         "O Batismo de Jesus no Rio Jordão",
+        "A auto - Revelação de Jesus nas Bodas de Caná",
+        "O Anúncio do Reino de Deus e o convite a conversão",
         "A Transfiguração de Jesus",
-        "A Instituição da Eucaristia"
-      ]},
+        "A Instituição da Eucaristia" ]},
+
       { nome: "Dolorosos", singular: "doloroso", itens: [
-        "A Agonia de Jesus no Horto",
+        "A Agonia de Jesus no Horto das Oliveiras",
         "A Flagelação de Jesus",
         "A Coroação de Espinhos",
         "Jesus carrega a Cruz até o Calvário",
-        "A Crucifixão e Morte de Jesus"
-      ]},
+        "A Crucifixão e Morte de Jesus" ]},
+
       { nome: "Gloriosos", singular: "glorioso", itens: [
-        "A Ressurreição de Jesus",
+          "A Ressurreição de Jesus",
         "A Ascensão de Jesus ao Céu",
-        "A Vinda do Espírito Santo",
+        "A vinda do Espírito Santo sobre os apóstolos",
         "A Assunção de Maria ao Céu",
-        "A Coroação de Maria"
+        "A Coroação de Maria no céu "
       ]}
     ];
 
