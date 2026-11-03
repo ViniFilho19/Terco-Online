@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Terço</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+
+<body>
+  <main>
+    <!-- Terço desenhado em SVG (as contas são criadas pelo JavaScript) -->
+    <div class="rosary">
+      <svg id="svg" viewBox="0 0 600 860" role="img" aria-label="Terço">
+        <defs>
+          <filter id="glow" x="-200%" y="-200%" width="500%" height="500%">
+            <feGaussianBlur stdDeviation="5" result="b"/>
+            <feMerge>
+              <feMergeNode in="b"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <filter id="blur" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="9"/>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Painel com a oração da vez -->
+    <section class="panel">
+      <div class="tabs" id="tabs"></div>
+
+      <div class="stage">
+        <p class="where" id="where"></p>
+        <h1 id="name" aria-live="polite"></h1>
+        <p class="count" id="count"></p>
+        <div class="text" id="text"></div>
+      </div>
+
+      <div class="bar">
+        <button class="nav" id="prev">‹ Voltar</button>
+        <button class="nav next" id="next">Avançar ›</button>
+      </div>
+
+      <div class="meta">
+        <span class="kbd">Use as setas ← → do teclado · </span>
+        <span>Toque em uma conta para ir até ela · </span>
+        <span id="pos"></span> ·
+        <button id="reset">Reiniciar</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
