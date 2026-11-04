@@ -216,7 +216,7 @@
 
         for (let j = dezena === 0 ? 1 : 0; j < 12; j++) {
 
-          const angulo = (90 + (dezena * 12 + j) * 360 / 60) * Math.PI / 180;
+          const angulo = (90 - (dezena * 12 + j) * 360 / 60) * Math.PI / 180;
 
           const x = CENTRO_X + RAIO * Math.cos(angulo);
 
@@ -509,7 +509,43 @@
       salvarProgresso();
 
     }
+// ---- Tema claro / escuro ----
+const botaoTema = $("theme");
+const html = document.documentElement;
 
+const ICONE_SOL =
+  '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/>' +
+  '<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+const ICONE_LUA =
+  '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+
+function temaAtual() {
+  return html.dataset.theme ||
+    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+}
+
+// o botão mostra o tema para o qual vai trocar
+function atualizarBotaoTema() {
+  const escuro = temaAtual() === "dark";
+  botaoTema.innerHTML = (escuro ? ICONE_SOL : ICONE_LUA) +
+    "<span>" + (escuro ? "Tema claro" : "Tema escuro") + "</span>";
+}
+
+// se a pessoa já escolheu um tema antes, aplica
+try {
+  const temaSalvo = localStorage.getItem("terco-tema");
+  if (temaSalvo === "light" || temaSalvo === "dark") html.dataset.theme = temaSalvo;
+} catch (e) {}
+
+atualizarBotaoTema();
+
+botaoTema.onclick = (e) => {
+  const novo = temaAtual() === "dark" ? "light" : "dark";
+  html.dataset.theme = novo;
+  try { localStorage.setItem("terco-tema", novo); } catch (err) {}
+  atualizarBotaoTema();
+  e.currentTarget.blur();
+};
 
 
     /* ==========================================================
@@ -526,9 +562,9 @@
 
 
 
-    const TECLAS_AVANCAR = ["ArrowRight", "ArrowDown", "PageDown", " ", "Enter"];
+    const TECLAS_AVANCAR = [ "ArrowRight", "ArrowUp",  "PageUp", " ", "Enter"];
 
-    const TECLAS_VOLTAR  = ["ArrowLeft", "ArrowUp", "PageUp", "Backspace"];
+    const TECLAS_VOLTAR  = [ "ArrowLeft", "ArrowDown", "PageDown", "Backspace"];
 
 
 

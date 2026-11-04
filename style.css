@@ -188,6 +188,45 @@
       border-color: var(--ink);
     }
 
+    /* linha das abas + botão de tema */
+    .tabs-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .tabs-row .tabs { flex: 1; }
+
+    .theme-btn {
+      flex: none;
+      margin: 16px 24px 0 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: none;
+      border: 1px solid var(--done);
+      border-radius: 999px;
+      font-size: 1.05rem;
+      line-height: 1.2;
+    }
+
+    .theme-btn:hover {
+      background: var(--done);
+      color: var(--panel);
+    }
+
+    .theme-btn .ic {
+      width: 18px;
+      height: 18px;
+      flex: none;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .stage {
       flex: 1;
       min-height: 0;
@@ -289,4 +328,8 @@
       .stage { padding: 14px 20px; }
 
       .meta .kbd { display: none; }
+
+      /* no celular o botão de tema mostra só o ícone */
+      .theme-btn { padding: 8px 10px; }
+      .theme-btn span { display: none; }
     }

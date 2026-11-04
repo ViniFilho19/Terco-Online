@@ -10,6 +10,13 @@
   <link rel="icon" href="image/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="image/apple-touch-icon.png">
 
+  <!-- aplica o tema salvo antes da página aparecer (evita piscar) -->
+  <script>
+    try {
+      var t = localStorage.getItem("terco-tema");
+      if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  </script>
 </head>
 
 <body>
@@ -34,7 +41,11 @@
 
     <!-- Painel com a oração da vez -->
     <section class="panel">
-      <div class="tabs" id="tabs" data-style="1"></div>
+      <!-- abas dos mistérios + botão de tema -->
+      <div class="tabs-row">
+        <div class="tabs" id="tabs"></div>
+        <button class="theme-btn" id="theme"></button>
+      </div>
 
       <div class="stage">
         <p class="where" id="where"></p>
