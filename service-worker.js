@@ -1,4 +1,4 @@
-const CACHE_NAME = "terco-online-v1";
+const CACHE_NAME = "terco-online-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
