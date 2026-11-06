@@ -1,4 +1,4 @@
-const CACHE_NAME = "terco-online-v2";
+const CACHE_NAME = "terco-online-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -7,7 +7,9 @@ const APP_SHELL = [
   "./manifest.json",
   "./image/favicon.svg",
   "./image/favicon.ico",
-  "./image/apple-touch-icon.png"
+  "./image/apple-touch-icon.png",
+  "./image/app-192.png",
+  "./image/app-512.png"
 ];
 
 self.addEventListener("install", (event) => {
