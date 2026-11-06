@@ -333,3 +333,327 @@
       .theme-btn { padding: 8px 10px; }
       .theme-btn span { display: none; }
     }
+
+    /* ==========================================================
+   8. ACESSIBILIDADE — TAMANHO DA LETRA
+   ========================================================== */
+
+.font-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 24px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.font-controls button {
+  min-width: 36px;
+  min-height: 34px;
+  padding: 5px 10px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.font-controls button:hover {
+  background: var(--done);
+  color: var(--panel);
+}
+
+.font-controls button:focus-visible {
+  outline: 3px solid var(--halo);
+  outline-offset: 3px;
+}
+
+/* Tamanho das orações */
+.stage {
+  --terco-font-scale: 1;
+}
+
+.stage .where {
+  font-size: calc(1.15rem * var(--terco-font-scale));
+}
+
+.stage .where strong {
+  font-size: calc(1.45rem * var(--terco-font-scale));
+}
+
+.stage h1 {
+  font-size: calc(clamp(2.2rem, 5vw, 3.4rem) * var(--terco-font-scale));
+}
+
+.stage .count {
+  font-size: calc(1.3rem * var(--terco-font-scale));
+}
+
+.stage .text p {
+  font-size: calc(clamp(1.25rem, 2.1vw, 1.65rem) * var(--terco-font-scale));
+}
+
+/* Melhor visualização no celular */
+@media (max-width: 800px) {
+  .font-controls {
+    padding: 8px 20px 0;
+  }
+}
+
+[hidden] { display: none !important; }
+
+.modos {
+  display: flex;
+  gap: 6px;
+  padding: 16px 24px 0;
+}
+
+.modo {
+  flex: 1;
+  padding: 8px 12px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.modo[aria-pressed="true"] {
+  background: var(--done);
+  color: var(--panel);
+  border-color: var(--done);
+}
+
+.hora {
+  flex: 1;
+  margin: 0;
+  padding: 16px 24px 0;
+  color: var(--muted);
+  font-size: 1.05rem;
+  font-style: italic;
+}
+
+.rotulo {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--done);
+  font-size: 0.75em;
+  font-style: italic;
+}
+
+@media (max-width: 800px) {
+  .modos { padding: 12px 20px 0; }
+  .modo { font-size: 0.95rem; padding: 6px 8px; }
+}
+
+/* ==========================================================
+   9. MENU (gaveta em tela cheia no celular)
+   ========================================================== */
+
+/* no computador, esses elementos extras ficam escondidos */
+.topbar,
+.menu-topo,
+.menu-rotulo,
+.menu-reset { display: none; }
+
+.menu-btn {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.menu-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.menu-btn:focus-visible { outline: 3px solid var(--halo); outline-offset: 3px; }
+
+@media (max-width: 800px) {
+  main { grid-template-rows: 30% 1fr; }
+
+  /* barra com título e botão ☰ */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-txt strong { display: block; font-size: 1.3rem; font-weight: 600; line-height: 1.15; }
+  .topbar-txt span   { display: block; color: var(--muted); font-size: 1.05rem; }
+
+  /* a gaveta: tela cheia (100vh; 100dvh evita corte pela barra do navegador) */
+  .menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    width: 70%;
+    height: 70vh;
+    height: 100dvh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: calc(14px + env(safe-area-inset-top, 0px)) 20px calc(20px + env(safe-area-inset-bottom, 0px));
+    background: var(--panel);
+    overflow-y: auto;
+    transform: translateX(100%);
+    visibility: hidden;
+    transition: transform 0.28s ease, visibility 0s linear 0.28s;
+  }
+
+  .menu.aberto {
+    transform: none;
+    visibility: visible;
+    transition: transform 0.28s ease, visibility 0s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu, .menu.aberto { transition: none; }
+  }
+
+  /* o .tabs-row some como caixa para os filhos entrarem na ordem do menu */
+  .menu .tabs-row { display: contents; }
+
+  .menu-topo {
+    order: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .menu-topo span { font-size: 1.7rem; font-weight: 600; }
+
+  .menu-rotulo {
+    display: block;
+    margin: 22px 0 8px;
+    color: var(--muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  #rot-terco     { order: 1; }
+  .menu .modos   { order: 2; padding: 0; }
+  #rot-misterios { order: 3; }
+  .menu .tabs    { order: 4; flex: none; flex-direction: column; flex-wrap: nowrap; gap: 8px; padding: 0; }
+  .menu .hora    { order: 4; flex: none; padding: 0; font-size: 1.15rem; }
+  #rot-letra     { order: 5; }
+  .menu .font-controls { order: 6; padding: 0; gap: 8px; }
+  #rot-tema      { order: 7; }
+  .menu .theme-btn { order: 8; }
+  .menu-reset    { order: 9; }
+
+  .menu .modo { min-height: 48px; font-size: 1.2rem; }
+
+  .menu .tab {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 52px;
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-size: 1.35rem;
+    text-align: left;
+  }
+  .menu .tab small { display: inline; font-size: 0.95rem; }
+
+  .menu .font-controls span { display: none; }
+  .menu .font-controls button {
+    flex: 1;
+    min-height: 48px;
+    border-radius: 12px;
+    font-size: 1.3rem;
+  }
+
+  .menu .theme-btn {
+    margin: 0;
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+    padding: 8px 14px;
+    border-color: var(--line);
+    border-radius: 12px;
+  }
+  .menu .theme-btn span { display: inline; }
+
+  .menu-reset {
+    display: block;
+    margin: 20px auto 0;
+    min-height: 44px;
+    background: none;
+    border: 0;
+    color: var(--muted);
+    font-size: 1.15rem;
+    text-decoration: underline;
+  }
+}
+
+/* ==========================================================
+   10. SOBRE ESTE TERÇO
+   ========================================================== */
+#sobre {
+  width: min(92vw, 30rem);
+  padding: 24px 24px 20px;
+  background: var(--panel);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  font-family: inherit;
+}
+
+#sobre::backdrop { background: rgba(8, 9, 14, 0.65); }
+
+#sobre h2 { margin: 0 0 12px; font-size: 1.8rem; font-weight: 600; }
+
+#sobre p { margin: 0 0 12px; font-size: 1.2rem; line-height: 1.5; }
+
+#sobre button {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 16px;
+  background: var(--ink);
+  color: var(--panel);
+  border: 1px solid var(--ink);
+  border-radius: 12px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+#sobre button:focus-visible { outline: 3px solid var(--halo); outline-offset: 3px; }
+
+/* o botão do menu só aparece no celular */
+.menu-sobre { display: none; }
+
+@media (max-width: 800px) {
+  .menu-sobre {
+    order: 9;
+    display: block;
+    margin: 20px auto 0;
+    min-height: 44px;
+    background: none;
+    border: 0;
+    color: var(--muted);
+    font-size: 1.15rem;
+    text-decoration: underline;
+  }
+
+  .menu-reset { order: 10; margin-top: 0; }
+
+  /* no celular o rodapé não precisa do link, porque ele já está no menu */
+  .meta .sobre-link { display: none; }
+}

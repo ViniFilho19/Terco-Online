@@ -3,13 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#12141d">
-  <meta name="description" content="Acompanhe o Santo Terço com as orações escritas e o terço interativo.">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Terço">
   <title>Terço</title>
-  <link rel="manifest" href="manifest.json">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="image/favicon.svg" type="image/svg+xml">
@@ -26,6 +20,14 @@
 </head>
 
 <body>
+
+  <dialog id="sobre" aria-labelledby="sobre-titulo">
+  <h2 id="sobre-titulo">Sobre este terço</h2>
+  <p>Este terço digital é um apoio para quem quer aprender a rezar o terço. Ele <strong>não substitui o terço físico</strong>, nem a oração pessoal, a Missa ou a orientação da Igreja.</p>
+  <p>Use-o como guia para conhecer a ordem das orações e dos mistérios.</p>
+  <p>As meditações dos Mistérios Dolorosos são reflexões breves, só para ajudar. Em caso de dúvida, procure seu padre ou sua paróquia.</p>
+  <button type="button" id="sobre-fechar">Entendi</button>
+</dialog>
   <main>
     <!-- Terço desenhado em SVG (as contas são criadas pelo JavaScript) -->
     <div class="rosary">
@@ -47,9 +49,52 @@
 
     <!-- Painel com a oração da vez -->
     <section class="panel">
-      <div class="tabs-row">
-        <div class="tabs" id="tabs"></div>
-        <button class="theme-btn" id="theme"></button>
+
+      <!-- barra do celular: título + botão do menu -->
+      <header class="topbar">
+        <div class="topbar-txt">
+          <strong id="topo-titulo">Terço Mariano</strong>
+          <span id="topo-sub"></span>
+        </div>
+        <button type="button" class="menu-btn" id="menu-abrir"
+                aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </header>
+
+      <!-- no computador fica no painel; no celular vira a gaveta em tela cheia -->
+      <div class="menu" id="menu">
+        <div class="menu-topo">
+          <span>Menu</span>
+          <button type="button" class="menu-btn" id="menu-fechar" aria-label="Fechar menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+          </button>
+        </div>
+
+        <p class="menu-rotulo" id="rot-terco">Qual terço</p>
+        <div class="modos" role="group" aria-label="Escolher terço">
+          <button type="button" class="modo" data-modo="mariano" aria-pressed="true">Terço Mariano</button>
+          <button type="button" class="modo" data-modo="misericordia" aria-pressed="false">Terço da Misericórdia</button>
+        </div>
+
+        <p class="menu-rotulo" id="rot-misterios">Mistérios</p>
+        <div class="tabs-row">
+          <div class="tabs" id="tabs"></div>
+          <p class="hora" id="hora" hidden>Hora da Misericórdia · 15h</p>
+          <button class="theme-btn" id="theme"></button>
+        </div>
+
+        <p class="menu-rotulo" id="rot-letra">Letra</p>
+        <div class="font-controls" aria-label="Controles de tamanho da letra">
+          <span>Letra:</span>
+          <button type="button" id="font-decrease" aria-label="Diminuir tamanho da letra" title="Diminuir letra">A−</button>
+          <button type="button" id="font-reset" aria-label="Restaurar tamanho original" title="Tamanho original">A</button>
+          <button type="button" id="font-increase" aria-label="Aumentar tamanho da letra" title="Aumentar letra">A+</button>
+        </div>
+
+        <p class="menu-rotulo" id="rot-tema">Aparência</p>
+        <button type="button" class="menu-sobre" id="menu-sobre">Sobre este terço</button>
+        <button type="button" class="menu-reset" id="menu-reset">Reiniciar terço</button>
       </div>
 
       <div class="stage">
@@ -68,21 +113,12 @@
         <span class="kbd">Use as setas ← → do teclado · </span>
         <span>Toque em uma conta para ir até ela · </span>
         <span id="pos"></span> ·
-        <button id="reset">Reiniciar</button>
+        <button id="reset">Reiniciar</button> ·
+<button id="sobre-abrir" class="sobre-link">Sobre</button>
       </div>
     </section>
   </main>
 
   <script src="script.js"></script>
-  <script>
-    // Registra o service worker para permitir o uso offline após a primeira visita.
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", function () {
-        navigator.serviceWorker.register("./service-worker.js").catch(function (error) {
-          console.error("Não foi possível ativar o modo offline:", error);
-        });
-      });
-    }
-  </script>
 </body>
 </html>
