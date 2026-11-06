@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#12141d">
+  <meta name="description" content="Acompanhe o Santo Terço com as orações escritas e o terço interativo.">
+  <link rel="manifest" href="./manifest.json">
   <title>Terço</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=2">
@@ -120,5 +123,13 @@
   </main>
 
   <script src="script.js?v=2"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+          .catch((error) => console.error("Falha ao registrar Service Worker:", error));
+      });
+    }
+  </script>
 </body>
 </html>
